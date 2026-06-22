@@ -35,6 +35,14 @@ h2 {
   word-spacing: 4px;
   background-color: #80808044;
 }
+#HelpText {
+  color: white;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  background-color: #80808044;
+  display: none;
+}
+
 #NumOfCo {
   padding: 5px;
   font-weight: bolder;

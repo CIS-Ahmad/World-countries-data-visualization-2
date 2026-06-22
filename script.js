@@ -195,8 +195,12 @@ const countries = [
 ]
 
 let Asce = true;
-
+let SeV = null;
 let btnBwisClicked = true;
+
+function getRandomColor() {
+    return "#" + Math.floor(Math.random() * 16777215).toString(16);
+}
 
 function getEleUsingID(ID) {
     return document.getElementById(ID);
@@ -251,11 +255,36 @@ function SortArray(ArrayData) {
 function Display(ArrayData) {
     const output = getEleUsingID(`output`);
     output.innerHTML = "";
+    const HT = getEleUsingID("HelpText");
 
+    if (SeV) {
+        HT.style.display = "flex";
+
+        const PreText = getEleUsingID("pretext");
+        PreText.textContent = SeV;
+        PreText.style.color = getRandomColor();
+
+        const CoNum = getEleUsingID("NumberOfCu");
+        CoNum.textContent = ArrayData.length;
+        CoNum.style.color = getRandomColor();
+    }
+    else {
+        HT.style.display = "none";
+
+    }
     for (let i = 0; i < ArrayData.length; i++) {
         CreateElement("div", "GridElement", "", ArrayData[i], "output");
     }
 
+}
+
+function FDisplay() {
+    const SerchBox = getEleUsingID("SerchBox");
+    const value = SerchBox.value;
+
+    const filtered = (btnBwisClicked ? GetCountryStartWithN(value) : GetCountryContineN(value));
+
+    Display(SortArray(filtered));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -274,26 +303,28 @@ document.addEventListener("DOMContentLoaded", () => {
             Sortbtn.innerHTML = `<img src="Image/Z to A.png">`;
             Asce = false;
             Sortbtn.title = "Sorting A → Z";
+            FDisplay();
         }
         else {
             Sortbtn.innerHTML = `<img src="Image/A to Z.png">`;
             Asce = true;
             Sortbtn.title = "Sorting Z → A";
+            FDisplay();
         }
     });
 
-    const SerchBox = CreateElement("input", "SerchBox", null, null, "SearchGroup");
+    const SerchBox = CreateElement("input", "SerchBox", "SerchBox", null, "SearchGroup");
     SerchBox.type = "text";
     SerchBox.placeholder = "search Countries";
 
-    SerchBox.addEventListener("input", () => {
+    SerchBox.addEventListener("input", (e) => {
 
-        if (btnBwisClicked) {
-            Display(SortArray(GetCountryStartWithN(SerchBox.value)));
-        }
-        else {
-            Display(SortArray(GetCountryContineN(SerchBox.value)));
-        }
+        e.target.value = e.target.value.replace(/[^a-zA-Z ]/g, "");
+
+        SeV = SerchBox.value;
+
+
+        FDisplay();
     });
 
     const SerachTool = CreateElement("button", "SerachTool", "", "", "SearchGroup");
@@ -336,25 +367,21 @@ document.addEventListener("DOMContentLoaded", () => {
           </svg>`
 
     SerachTool.addEventListener("click", () => {
+        SeV = SerchBox.value;
 
-        if (btnBwisClicked) {
-            Display(SortArray(GetCountryStartWithN(SerchBox.value)));
-        }
-        else {
-            Display(SortArray(GetCountryContineN(SerchBox.value)));
-        }
+        FDisplay();
 
     });
 
     BWbtn.addEventListener("click", () => {
         buttons.forEach(b => b.classList.remove("active"));
+        SeV = SerchBox.value;
 
         BWbtn.classList.add("active");
         AWbtn.disabled = false;
         BWbtn.disabled = true;
         btnBwisClicked = true;
-        Display(SortArray(GetCountryStartWithN(SerchBox.value)));
-
+        FDisplay();
 
     });
 
@@ -367,9 +394,10 @@ document.addEventListener("DOMContentLoaded", () => {
         AWbtn.disabled = true;
         BWbtn.disabled = false;
         btnBwisClicked = false;
-        Display(SortArray(GetCountryContineN(SerchBox.value)));
+        SeV = SerchBox.value;
+
+        FDisplay();
 
     });
-
 
 }); 
