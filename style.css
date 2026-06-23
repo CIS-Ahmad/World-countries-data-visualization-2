@@ -8,7 +8,7 @@
   position: relative;
   width: 100%;
   height: 75vh;
-  background: url("Image/globe-2.jpg") center / cover no-repeat;
+  background: url("assets/Image/globe-2.jpg") center / cover no-repeat;
 
   display: flex;
   flex-direction: column;
@@ -108,6 +108,6 @@ h2 {
   align-items: center;
   justify-content: center;
   font-size: 30px;
-  background: white url(Image/map_image.jpg) no-repeat center / cover;
+  background: white url(assets/Image/map_image.jpg) no-repeat center / cover;
   margin: 20px;
 }

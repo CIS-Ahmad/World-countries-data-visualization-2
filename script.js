@@ -1,3 +1,4 @@
+
 const countries = [
     'Afghanistan',
     'Albania',
@@ -296,17 +297,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const Sortbtn = CreateElement("button", "but", "", "", "butGroup");
 
-    Sortbtn.innerHTML = `<img src="Image/A to Z.png">`;
+    Sortbtn.innerHTML = `<img src="assets/Image/a-to-z.png">`;
 
     Sortbtn.addEventListener("click", () => {
         if (Asce) {
-            Sortbtn.innerHTML = `<img src="Image/Z to A.png">`;
+            Sortbtn.innerHTML = `<img src="assets/Image/z-to-a.png">`;
             Asce = false;
             Sortbtn.title = "Sorting A → Z";
             FDisplay();
         }
         else {
-            Sortbtn.innerHTML = `<img src="Image/A to Z.png">`;
+            Sortbtn.innerHTML = `<img src="assets/Image/a-to-z.png">`;
             Asce = true;
             Sortbtn.title = "Sorting Z → A";
             FDisplay();
@@ -329,42 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const SerachTool = CreateElement("button", "SerachTool", "", "", "SearchGroup");
 
-    SerachTool.innerHTML = `<svg
-            fill="#000000"
-            viewBox="0 0 24 24"
-            id="search-alt"
-            data-name="Line Color"
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon line-color"
-          >
-            <line
-              id="secondary"
-              x1="21"
-              y1="21"
-              x2="15.8"
-              y2="15.8"
-              style="
-                fill: none;
-                stroke: rgb(255, 255, 255);
-                stroke-linecap: round;
-                stroke-linejoin: round;
-                stroke-width: 2;
-              "
-            ></line>
-            <circle
-              id="primary"
-              cx="10.5"
-              cy="10.5"
-              r="7.5"
-              style="
-                fill: none;
-                stroke: rgb(255, 255, 255);
-                stroke-linecap: round;
-                stroke-linejoin: round;
-                stroke-width: 2;
-              "
-            ></circle>
-          </svg>`
+    SerachTool.innerHTML = `<img src="assets/SVG/searchTool.svg">`
 
     SerachTool.addEventListener("click", () => {
         SeV = SerchBox.value;
@@ -400,4 +366,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-}); 
+});
+
+Display(countries);
